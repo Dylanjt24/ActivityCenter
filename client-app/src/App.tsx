@@ -3,7 +3,10 @@ import './App.css'
 function App() {
 
   return (
-    <h1>Activity Center</h1>
+    <>
+      <h1>Activity Center</h1>
+      <p>React refreshes each component as needed</p>
+    </>
   )
 }
 
