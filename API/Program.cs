@@ -13,6 +13,12 @@ builder.Services.AddDbContext<DataContext>(opt =>
 {
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+// Add cors policy for resources coming from localhost:3000
+builder.Services.AddCors(opt => {
+    opt.AddPolicy("CorsPolicy", policy => {
+        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+    });
+});
 
 var app = builder.Build();
 
@@ -23,21 +29,24 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Add cors middleware to allow cross origin requests
+app.UseCors("CorsPolicy");
+
 app.UseAuthorization();
 
 app.MapControllers();
 
-// using statement destroys the scope after following code is executed
-// create scope to get access to services
+// Using statement destroys the scope after following code is executed
+// Vreate scope to get access to services
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 
-// update database and log any errors that occurr
+// Update database and log any errors that occurr
 try
 {
     var context = services.GetRequiredService<DataContext>();
     await context.Database.MigrateAsync();
-    // seed data in db if needed
+    // Seed data in db if needed
     await Seed.SeedData(context);
 }
 catch (Exception ex)
