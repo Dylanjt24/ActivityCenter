@@ -15,7 +15,8 @@ builder.Services.AddDbContext<DataContext>(opt =>
 });
 // Add cors policy for resources coming from localhost:3000
 builder.Services.AddCors(opt => {
-    opt.AddPolicy("CorsPolicy", policy => {
+    opt.AddPolicy("CorsPolicy", policy => 
+    {
         policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
     });
 });
