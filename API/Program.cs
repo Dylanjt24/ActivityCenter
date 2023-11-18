@@ -1,4 +1,5 @@
 using Application.Activities;
+using Application.Core;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -23,6 +24,8 @@ builder.Services.AddCors(opt => {
 });
 // Tell application about MediatR
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(List.Handler).Assembly));
+// Registers Automapper as a service, looks inside Assembly, which contains MappingProfiles, and registers all of our mapping profiles so they can then be used
+builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
 var app = builder.Build();
 
