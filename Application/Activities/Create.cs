@@ -19,6 +19,7 @@ namespace Application.Activities
                 _context = context;
             }
 
+            // Add activity taken from the request to db
             public async Task Handle(Command request, CancellationToken cancellationToken)
             {
                 _context.Activities.Add(request.Activity);

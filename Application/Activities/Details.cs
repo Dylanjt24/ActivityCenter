@@ -19,6 +19,7 @@ namespace Application.Activities
                 _context = context;
             }
 
+            // Get one activity that matches Guid taken from activity in the query
             public async Task<Activity> Handle(Query request, CancellationToken cancellationToken)
             {
                 return await _context.Activities.FindAsync(request.Id);

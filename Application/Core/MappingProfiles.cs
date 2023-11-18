@@ -7,6 +7,7 @@ namespace Application.Core
     {
         public MappingProfiles()
         {
+            // Maps fields from one activity to another
             CreateMap<Activity, Activity>();
         }
     }

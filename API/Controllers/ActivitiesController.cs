@@ -10,18 +10,21 @@ namespace API.Controllers
     public class ActivitiesController : BaseApiController
     {
 
+        // Get all route
         [HttpGet] // api/activites
         public async Task<ActionResult<List<Activity>>> GetActivities()
         {
             return await Mediator.Send(new List.Query());
         }
 
+        // Get one route
         [HttpGet("{id}")]  // api/activities/{guid}
         public async Task<ActionResult<Activity>> GetActivity(Guid id)
         {
             return await Mediator.Send(new Details.Query{Id = id});
         }
 
+        // Create route
         [HttpPost]
         public async Task<IActionResult> CreateActivity(Activity activity)
         {
@@ -29,6 +32,7 @@ namespace API.Controllers
             return Ok();
         }
 
+        // Edit route
         [HttpPut("{id}")]
         public async Task<IActionResult> EditActivity(Guid id, Activity activity)
         {

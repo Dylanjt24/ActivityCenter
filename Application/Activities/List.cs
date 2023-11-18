@@ -16,6 +16,8 @@ namespace Application.Activities
             {
                 _context = context;
             }
+
+            // Get all activities and put them into a list
             public async Task<List<Activity>> Handle(Query request, CancellationToken cancellationToken)
             {
                 return await _context.Activities.ToListAsync();

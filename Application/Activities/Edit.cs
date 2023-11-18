@@ -26,6 +26,7 @@ namespace Application.Activities
             {
                 var activity = await _context.Activities.FindAsync(request.Activity.Id);
 
+                // Map fields from request activity to activity grabbed from db
                 _mapper.Map(request.Activity, activity);
                 activity.UpdatedAt = DateTime.Now;
                 await _context.SaveChangesAsync();
