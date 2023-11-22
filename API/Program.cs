@@ -36,7 +36,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Add cors middleware to allow cross origin requests
+// Add cors middleware to allow cross origin requests from our API to front end
 app.UseCors("CorsPolicy");
 
 app.UseAuthorization();
@@ -44,7 +44,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 // Using statement destroys the scope after following code is executed
-// Vreate scope to get access to services
+// Create scope to get access to services
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 
